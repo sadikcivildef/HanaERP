@@ -28,7 +28,7 @@
 <Header />
 
 <div
-  class="min-h-[calc(100vh-4.5rem)] py-4 flex items-center justify-center bg-[url('bg.svg')] bg-cover"
+  class="min-h-[calc(100vh-4.5rem)] py-4 flex items-center justify-center bg-[url('/bg.svg')] bg-cover"
 >
   <div
     class="flex w-full max-w-sm h-125 border border-primary/30 rounded-2xl shadow-lg overflow-hidden mx-5"
@@ -90,7 +90,7 @@
   </div>
 </div>
 {#if showMessage}
-  <div class="fixed bottom-5 text-red-500 right-5 rounded-xl px-6 py-4 flex items-center gap-3 bg-white shadow-lg"  in:fly={{ x: 120, duration: 250 }} out:fly={{ x: -120, duration: 350 }}> 
+  <div class="fixed bottom-5 border border-gray-300 text-red-500 right-5 rounded-xl px-6 py-4 flex items-center gap-3 bg-white shadow-lg"  in:fly={{ x: 120, duration: 250 }} out:fly={{ x: -120, duration: 350 }}> 
     <Icon icon="wordpress:caution" width="24" height="24" /> <p >{form?.message}</p>
   </div>
 {/if}
