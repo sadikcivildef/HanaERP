@@ -5,10 +5,10 @@
   let menuOpen = false;
 </script>
 
-<div class="h-18 flex items-center justify-between px-10">
-  <div class="flex items-center text-2xl gap-3 text-amber-900">
+<div class="h-18 flex items-center justify-between px-10 z-50">
+  <a href="/" class="flex items-center text-2xl gap-3 text-amber-900">
     <img src={icon} alt="" class="h-10" /> Hana ERP
-  </div>
+  </a>
 
   <div class="relative flex items-center">
     <ul class="flex items-center max-md:{menuOpen ? "": "hidden"} max-md:items-start max-md:gap-4  gap-5 max-md:absolute max-md:top-8 max-md:right-0 max-md:min-w-45 max-md:border rounded-md max-md:border-gray-300 max-md:p-3 bg-white max-md:flex-col max-md:shadow-md">
