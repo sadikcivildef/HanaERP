@@ -8,7 +8,7 @@
 
 
 <div
-  class="p-15 min-h-120 flex flex-col gap-10 items-center justify-center bg-[url(bg.svg)] bg-cover"
+  class="p-15 min-h-120 flex flex-col gap-10 items-center justify-center bg-[url('bg.svg')] bg-cover"
 >
   <div class="text-center  text-6xl font-mono text-primary">Welcome <span class="max-md:hidden">to Hana ERP</span></div>
   <div class="text-center max-w-270 leading-7 sm:leading-loose text-2xl max-sm:text-xl text-gray-500">

@@ -28,7 +28,7 @@
 <Header />
 
 <div
-  class="min-h-[calc(100vh-4.5rem)] py-4 flex items-center justify-center bg-[url(bg.svg)] bg-cover"
+  class="min-h-[calc(100vh-4.5rem)] py-4 flex items-center justify-center bg-[url('bg.svg')] bg-cover"
 >
   <div
     class="flex w-full max-w-sm h-125 border border-primary/30 rounded-2xl shadow-lg overflow-hidden mx-5"
