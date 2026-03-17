@@ -28,7 +28,7 @@
         </li>
         <li>
           <a
-            href="/lifecycle"
+            href="/dashboard/people"
             class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
             ><Icon
               icon="tabler:users"
