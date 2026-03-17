@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$app/forms";
   import icon from "$lib/assets/favicon.svg";
   import Icon from "@iconify/svelte";
   import { fly } from "svelte/transition";
@@ -16,13 +17,13 @@
             [-webkit-mask-image:linear-gradient(to_bottom,black_95%,transparent_100%)] custom-scroll"
   >
     <div class="text-xs text-gray-500">
-      <div class="px-4">Home</div>
+      <div class="px-4">HRMS</div>
       <ul class="text-sm text-black px-2 flex flex-col pt-2.5 gap-2">
         <li>
           <a
             href="/dashboard"
             class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
-            ><Icon icon="tabler:dashboard" width="16" height="16" /> Dashboard</a
+            ><Icon icon="tabler:dashboard" width="16" height="16" /> Home</a
           >
         </li>
         <li>
@@ -30,31 +31,54 @@
             href="/lifecycle"
             class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
             ><Icon
-              icon="carbon:ai-governance-lifecycle"
+              icon="tabler:users"
               width="16"
               height="16"
-            /> Lifecycle</a
+            /> People</a
           >
         </li>
         <li>
           <a
             href="/lifecycle"
             class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
-            ><Icon icon="boxicons:bar-chart-big" width="16" height="16" /> Analytics</a
+            ><Icon icon="tabler:clock-2" width="16" height="16" /> Time &
+            Leave</a
           >
         </li>
         <li>
           <a
             href="/lifecycle"
             class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
-            ><Icon icon="ic:outline-folder" width="16" height="16" /> Projects</a
+            ><Icon icon="tabler:credit-card" width="16" height="16" /> Pay & Benefits</a
           >
         </li>
         <li>
           <a
             href="/lifecycle"
             class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
-            ><Icon icon="radix-icons:people" width="16" height="16" /> Projects</a
+            ><Icon icon="tabler:building-burj-al-arab" width="16" height="16" /> Performance
+            & Talent</a
+          >
+        </li>
+        <li>
+          <a
+            href="/lifecycle"
+            class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
+            ><Icon icon="tabler:report" width="16" height="16" /> Insights</a
+          >
+        </li>
+        <li>
+          <a
+            href="/lifecycle"
+            class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
+            ><Icon icon="tabler:users-group" width="16" height="16" /> Engagement</a
+          >
+        </li>
+        <li>
+          <a
+            href="/lifecycle"
+            class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
+            ><Icon icon="tabler:wheat" width="16" height="16" /> Support</a
           >
         </li>
       </ul>
@@ -153,7 +177,9 @@
     </ul>
     <div class="px-2 py-4 relative">
       {#if userMenuOpen}
-        <div in:fly={{ x: -5, y:5, duration: 50 }} out:fly={{ x: -5, y:5, duration: 50 }}
+        <div
+          in:fly={{ x: -5, y: 5, duration: 50 }}
+          out:fly={{ x: -5, y: 5, duration: 50 }}
           class="absolute font-medium text-base bottom-4 -right-63 bg-white w-64 rounded-lg border border-gray-300 shadow-md"
         >
           <div
@@ -208,16 +234,17 @@
           <div class=" px-1 border-t border-gray-300 py-1.5">
             <ul class="text-sm text-black flex flex-col gap-1">
               <li>
-                <a
-                  href="/dashboard"
-                  class="flex px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
-                  ><Icon
-                    class="text-gray-500"
-                    icon="tabler:logout"
-                    width="16"
-                    height="16"
-                  /> Log out</a
-                >
+                <form method="post" action="?/signOut" use:enhance>
+                  <button
+                    class="flex w-full cursor-pointer px-2 hover:bg-primary/5 rounded-md items-center gap-2 py-1.5"
+                    ><Icon
+                      class="text-gray-500"
+                      icon="tabler:logout"
+                      width="16"
+                      height="16"
+                    /> Log out</button
+                  >
+                </form>
               </li>
             </ul>
           </div>
@@ -225,7 +252,7 @@
       {/if}
       <button
         onclick={() => (userMenuOpen = !userMenuOpen)}
-        class={`px-2 w-full flex cursor-default ${userMenuOpen ? "bg-primary/5": ""} hover:bg-primary/5 rounded-md items-center gap-2 py-1.5`}
+        class={`px-2 w-full flex cursor-default ${userMenuOpen ? "bg-primary/5" : ""} hover:bg-primary/5 rounded-md items-center gap-2 py-1.5`}
       >
         <img src="/shadcn.jpg" alt="" class="w-8 h-8 rounded-lg" />
         <div class="flex-1 flex flex-col text-start justify-start">
