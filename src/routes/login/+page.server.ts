@@ -32,7 +32,8 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' });
 		}
 
-		return redirect(302, '/dashboard');
+		// return success payload (client handles navigation to dashboard)
+		return { success: true, message: 'Credentials match successfully!' };
 	},
 	signUpEmail: async (event) => {
 		const formData = await event.request.formData();
