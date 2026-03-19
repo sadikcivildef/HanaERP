@@ -4,6 +4,8 @@
   import Icon from "@iconify/svelte";
   import { fly } from "svelte/transition";
   let userMenuOpen = false;
+  export let data;
+  
 </script>
 
 <div class="w-64 flex flex-col h-screen bg-primary/3 border-r border-gray-300">
@@ -180,15 +182,15 @@
         <div
           in:fly={{ x: -5, y: 5, duration: 50 }}
           out:fly={{ x: -5, y: 5, duration: 50 }}
-          class="absolute font-medium text-base bottom-4 -right-63 bg-white w-64 rounded-lg border border-gray-300 shadow-md"
+          class="absolute z-50 pointer-events-auto font-medium text-base bottom-4 -right-63 bg-white w-64 rounded-lg border border-gray-300 shadow-md"
         >
           <div
             class="px-2 flex cursor-default border-b border-gray-300 text-xs items-center gap-2 py-2"
           >
             <img src="/shadcn.jpg" alt="" class="w-8 h-8 rounded-lg" />
             <div class="flex-1 flex flex-col text-start justify-start">
-              <div class="text-sm text-black font-semibold">shadcn</div>
-              m@example.com
+              <div class="text-sm text-black font-semibold">{data.user.name}</div>
+              {data.user.email}
             </div>
           </div>
           <div class="text-xs text-gray-500">
@@ -256,8 +258,8 @@
       >
         <img src="/shadcn.jpg" alt="" class="w-8 h-8 rounded-lg" />
         <div class="flex-1 flex flex-col text-start justify-start">
-          <div class="text-sm text-black font-semibold">shadcn</div>
-          m@example.com
+          <div class="text-sm text-black font-semibold">{data.user.name}</div>
+          {data.user.email}
         </div>
         <div class="ps-2 text-black">
           <Icon icon="pepicons-pencil:dots-y" width="16" height="16" />

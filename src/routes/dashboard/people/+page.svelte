@@ -1,13 +1,101 @@
 <script lang="ts">
-  import { navTitle } from "$lib/navStore";
+  import Button from "$lib/assets/ui/components/button.svelte";
+  import Input from "$lib/assets/ui/components/input.svelte";
+  import Pagination from "$lib/assets/ui/components/pagination.svelte";
+  import * as Table from "$lib/assets/ui/table";
+  import { navBtn, navBtnLink, navTitle } from "$lib/navStore";
+  import { startLoading } from "$lib/stores/loading";
+  import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
 
   // When this specific page loads, change the title
   onMount(() => {
-    $navTitle = "People Management";
+    $navTitle = "Employee";
+    $navBtn = "Add new";
+    $navBtnLink = "dashboard/people/add-new";
+
+    // Start loading animation
+    startLoading();
   });
+
+const employees = [
+  { id: 101, name: "Rahim Mia", department: "Sewing", section: "A1", position: "Operator", joining_date: "18-03-2026", status: "Active" },
+  { id: 102, name: "Fatima Begum", department: "Cutting", section: "-", position: "Assistant Operator", joining_date: "12-07-2024", status: "Inactive" },
+
+  { id: 103, name: "Md. Jamal Hossain", department: "Sewing", section: "A1", position: "Senior Operator", joining_date: "05-11-2022", status: "Active" },
+  { id: 104, name: "Ayesha Akter", department: "Sewing", section: "A2", position: "Operator", joining_date: "19-09-2023", status: "Active" },
+  { id: 105, name: "Kamal Uddin", department: "Cutting", section: "C1", position: "Cutter", joining_date: "03-04-2021", status: "Active" },
+  { id: 106, name: "Nasrin Sultana", department: "Finishing", section: "F3", position: "Checker", joining_date: "28-06-2024", status: "Active" },
+  { id: 107, name: "Sohag Mia", department: "Sewing", section: "B2", position: "Operator", joining_date: "14-02-2023", status: "Active" },
+  { id: 108, name: "Rina Begum", department: "Sewing", section: "A3", position: "Helper", joining_date: "09-10-2025", status: "Active" },
+  { id: 109, name: "Md. Faruk Hossain", department: "Iron", section: "I1", position: "Ironman", joining_date: "22-08-2020", status: "Active" },
+  { id: 110, name: "Shahnaz Parvin", department: "Packing", section: "P2", position: "Folder", joining_date: "17-01-2024", status: "Active" },
+
+  { id: 111, name: "Babu Miah", department: "Sewing", section: "A1", position: "Line Leader", joining_date: "30-05-2019", status: "Active" },
+  { id: 112, name: "Mst. Lovely Akter", department: "Sewing", section: "B1", position: "Operator", joining_date: "11-12-2023", status: "Active" },
+  { id: 113, name: "Jahangir Alam", department: "Cutting", section: "C2", position: "Marker Man", joining_date: "07-03-2022", status: "Active" },
+  { id: 114, name: "Suma Akter", department: "Finishing", section: "F1", position: "Thread Cutter", joining_date: "25-04-2025", status: "Active" },
+  { id: 115, name: "Rasel Khan", department: "Sewing", section: "A4", position: "Operator", joining_date: "16-08-2024", status: "Active" },
+  { id: 116, name: "Parvin Akter", department: "Sewing", section: "B3", position: "Helper", joining_date: "02-11-2025", status: "Active" },
+  { id: 117, name: "Md. Salim", department: "Maintenance", section: "-", position: "Helper", joining_date: "13-06-2021", status: "Active" },
+  { id: 118, name: "Rokeya Begum", department: "Finishing", section: "F2", position: "Checker", joining_date: "20-09-2023", status: "Active" },
+  { id: 119, name: "Habib Rahman", department: "Sewing", section: "A2", position: "Senior Operator", joining_date: "08-07-2020", status: "Active" },
+  { id: 120, name: "Sadia Islam", department: "Packing", section: "P1", position: "Packer", joining_date: "04-02-2025", status: "Active" },
+
+  // ───────────────────────────────────────────────
+  // Bulk generated style (121–220)
+  // ───────────────────────────────────────────────
+
+  { id: 121, name: "Md. Raju", department: "Sewing", section: "A3", position: "Operator", joining_date: "15-03-2024", status: "Active" },
+  { id: 122, name: "Laila Begum", department: "Sewing", section: "B1", position: "Operator", joining_date: "27-05-2023", status: "Active" },
+  { id: 123, name: "Asaduzzaman", department: "Cutting", section: "C1", position: "Cutter", joining_date: "19-10-2022", status: "Active" },
+  { id: 124, name: "Mim Akter", department: "Finishing", section: "F3", position: "Helper", joining_date: "06-12-2024", status: "Active" },
+  { id: 125, name: "Shakil Ahmed", department: "Sewing", section: "A1", position: "Operator", joining_date: "21-08-2023", status: "Active" },
+  { id: 126, name: "Nargis Fatema", department: "Packing", section: "P2", position: "Packer", joining_date: "10-01-2025", status: "Active" },
+  { id: 127, name: "Md. Imran", department: "Sewing", section: "B2", position: "Helper", joining_date: "03-04-2024", status: "Active" },
+  { id: 128, name: "Sultana Razia", department: "Sewing", section: "A4", position: "Operator", joining_date: "29-07-2023", status: "Active" },
+  { id: 129, name: "Belal Hossain", department: "Iron", section: "I1", position: "Ironman", joining_date: "14-11-2021", status: "Active" },
+  { id: 130, name: "Ruma Akter", department: "Finishing", section: "F1", position: "Checker", joining_date: "08-09-2024", status: "Active" },
+
+  // ... continuing pattern ...
+];
 </script>
 
-<div class="">
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit, amet asperiores enim accusantium quasi possimus quo dolores. Temporibus totam modi nostrum eum aliquid? Harum, cum repellendus, dolore culpa ea repellat, voluptate aliquam dolorem maiores explicabo nemo ipsum recusandae consequatur fugiat at architecto dolorum maxime in ut saepe minus delectus dolor magnam. Corporis provident ipsum sunt itaque odio! Harum earum ea velit aliquid nulla, officiis cumque numquam atque culpa unde deserunt obcaecati sapiente ipsum doloribus accusantium soluta molestias officia quidem tempore ex rerum magni totam fugit a? Quam exercitationem fugiat praesentium distinctio iure optio aliquam fuga temporibus? Aut tempore ex quis eaque, rem non quod earum sunt facilis velit omnis ratione consequatur natus, neque alias accusantium voluptates vitae exercitationem repellendus delectus inventore iusto beatae tempora quae? Illo nesciunt, quidem totam sint odit eos pariatur recusandae tenetur optio iusto quia dicta excepturi iste minima earum, alias maiores repellat unde voluptate nihil mollitia odio labore! Magni tempore, labore fuga voluptas minima in, quae iusto iure molestiae, ea mollitia laudantium rerum cumque ex dicta voluptates nostrum reprehenderit veniam ipsa id ratione atque. Dolores dolorem beatae excepturi iusto at non doloremque fuga, facilis qui earum omnis rerum necessitatibus libero, tenetur, debitis expedita reiciendis est eius dolorum. Doloremque dolorem nobis voluptatum harum adipisci. Dolorum nostrum maxime, deleniti reprehenderit doloribus porro inventore dolores? Neque non, necessitatibus incidunt minus magnam pariatur, sint dignissimos voluptatibus officia sequi nobis debitis. Amet consequatur, doloremque laboriosam similique quaerat at culpa. Culpa omnis laudantium sit molestiae? Quas, assumenda sed? Hic sapiente eum odit tempora laborum sunt consequuntur repudiandae, voluptatibus corrupti. Placeat, porro ipsum. Praesentium quasi voluptatum dolores repellat modi eveniet sunt, quaerat dignissimos aliquid rem ipsa labore assumenda. Vitae reprehenderit cumque nisi commodi mollitia sed tempore perspiciatis eligendi, explicabo ad ea cum. Adipisci debitis blanditiis, ipsam ullam iste, rem, quidem deserunt molestias numquam at ratione! Perspiciatis odit culpa sit? Eius at possimus eum earum labore rerum, aperiam ab magni odio illo obcaecati, dolorem in corrupti sunt, adipisci debitis repudiandae sint officiis. Enim culpa reprehenderit repellat obcaecati commodi voluptatem cum, laboriosam rerum iste, rem sapiente unde quisquam, quia eum! Cumque, quae ea impedit recusandae ex non reprehenderit dolorum! Reprehenderit cumque illo voluptates perferendis corporis, reiciendis aperiam distinctio mollitia accusantium obcaecati in dignissimos veritatis officiis neque! Repellendus sunt reprehenderit aperiam ipsam, minus, autem iste in voluptatibus obcaecati, ex voluptates dolorum facere provident magni. Praesentium ipsum totam tenetur tempore impedit beatae officiis assumenda, voluptatem nam exercitationem architecto enim reiciendis voluptatum, sint animi fugiat nobis, error harum. Dolorum eos tempora mollitia ratione aperiam est atque quia officiis, placeat voluptates, vero, reprehenderit autem quae? Obcaecati iure id dolore ab totam soluta aliquam doloremque nemo fugiat sapiente explicabo dolor ex atque odit deserunt sint consequatur consectetur officiis, illum accusantium sequi veritatis? Nam aspernatur beatae sed cumque dicta rem earum, nihil eos, saepe, magnam eaque provident fuga? Tenetur ut magni commodi quo sint facilis mollitia beatae accusantium necessitatibus incidunt laborum, quisquam harum quibusdam hic iste rem esse repellat nesciunt, alias similique laudantium cupiditate! Unde accusamus quam architecto distinctio odio, eaque eius hic veniam aliquam. Ex voluptate aperiam quibusdam quae dolore distinctio eius maxime, consequatur recusandae fuga deleniti quaerat commodi voluptates sint nihil, officia unde? Esse facilis ut natus tempora reiciendis voluptates in. Rerum, neque. Quisquam optio cum odio consequuntur dolorem! Consequatur illum reprehenderit, distinctio vero laudantium recusandae omnis maxime dolorem! Alias dolorem quo voluptates minus, aliquam tenetur itaque sit labore, eius, iure expedita. Facilis tenetur odit vero corporis odio, at nam non ipsa aperiam explicabo doloremque a ipsam nobis! Nemo ullam quasi, amet aut consectetur maxime ex, nulla eius labore velit eos modi dolor nobis pariatur praesentium itaque saepe beatae rerum officiis harum recusandae laborum repudiandae non quod. Accusantium blanditiis optio minus sapiente maiores in, dignissimos nam id quisquam possimus quod. Quos repudiandae consequatur quas, dolor harum iste dolores nostrum. Ullam ut sed voluptate sit omnis nulla optio officia, rem obcaecati aliquid sequi quia nihil! Possimus corporis dolorem atque molestias porro ducimus ipsa quo dignissimos reprehenderit recusandae labore iure, accusamus rem optio nesciunt ex nihil mollitia dolor velit, alias quia harum sit asperiores. Sapiente non voluptate aperiam ea! Optio, suscipit repellat quibusdam, ea adipisci consequatur consequuntur nam nobis quis voluptas beatae. Modi id nostrum iusto quas cupiditate! Ipsam, quasi, illum, error laboriosam ratione possimus ipsa veniam nostrum ad odio molestiae et deleniti hic consequatur voluptatem. Architecto repudiandae delectus placeat nihil minima ducimus porro neque qui nisi? Ex vero iusto eum quas explicabo, suscipit rerum? Quae fugit odio ducimus magnam sint error, eveniet pariatur deleniti unde, at rerum blanditiis minima nulla placeat! Molestias tempora dolore asperiores exercitationem sit consequuntur blanditiis velit, delectus atque hic aliquid sint similique dignissimos veritatis unde laboriosam est et nemo at quasi non, suscipit ut quos? Dolor veritatis officiis laudantium cum veniam nisi sint deserunt natus ad maxime, autem explicabo aut aperiam vitae quae molestias quod commodi officia perferendis est illo reprehenderit maiores. Rem corporis quod repudiandae consectetur nemo voluptatum tenetur quam modi accusamus corrupti fugit, explicabo illum assumenda aliquid qui error quidem ex, nisi quisquam architecto. Quasi repellendus dicta nemo ea, culpa delectus perspiciatis exercitationem perferendis nihil, hic cumque sed nobis unde ex corrupti esse ipsam saepe. Tempore totam accusamus harum autem ducimus, doloribus error voluptates assumenda unde quas omnis odit veritatis a repudiandae nulla laborum nam est quos explicabo exercitationem corrupti aut non magnam obcaecati. Qui fuga quos dolorum magni similique at, error quisquam non eveniet, veniam necessitatibus molestias atque dicta. Dolore obcaecati quos fugit!
+<div class="flex w-fit gap-3 items-center">
+  <Input
+    type="text"
+    name="search"
+    placeholder="Search by ID, Name, Section etc."
+    className="w-85"
+  />
+  <Button><Icon icon="tabler:search" class="-mx-1.5 my-0.5 w-5 h-5" /></Button>
 </div>
+
+<Pagination items={employees} itemsPerPage={10} let:paginatedItems>
+  <Table.Root>
+    <Table.TableHeader>
+      <Table.TableRow>
+        <Table.TableHead>ID</Table.TableHead>
+        <Table.TableHead>Name</Table.TableHead>
+        <Table.TableHead>Department</Table.TableHead>
+        <Table.TableHead>Section</Table.TableHead>
+        <Table.TableHead>Position</Table.TableHead>
+        <Table.TableHead>Joining Date</Table.TableHead>
+        <Table.TableHead align="right">Status</Table.TableHead>
+      </Table.TableRow>
+    </Table.TableHeader>
+    <Table.TableBody>
+      {#each paginatedItems as employee}
+        <Table.TableRow>
+          <Table.TableCell>{employee.id}</Table.TableCell>
+          <Table.TableCell>{employee.name}</Table.TableCell>
+          <Table.TableCell>{employee.department}</Table.TableCell>
+          <Table.TableCell>{employee.section}</Table.TableCell>
+          <Table.TableCell>{employee.position}</Table.TableCell>
+          <Table.TableCell>{employee.joining_date}</Table.TableCell>
+          <Table.TableCell align="right">{employee.status}</Table.TableCell>
+        </Table.TableRow>
+      {/each}
+    </Table.TableBody>
+  </Table.Root>
+</Pagination>
