@@ -15,6 +15,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
+
 // ============================================
 // ENUMS
 // ============================================
@@ -218,7 +219,7 @@ export const company = pgTable(
     index("company_name_idx").on(t.name),
     index("company_code_idx").on(t.code),
     index("company_is_active_idx").on(t.isActive),
-  ],
+  ]
 );
 
 // ============================================
@@ -243,7 +244,7 @@ export const role = pgTable(
     unique("role_company_name").on(t.companyId, t.name),
     index("role_company_idx").on(t.companyId),
     index("role_level_idx").on(t.level),
-  ],
+  ]
 );
 
 export const permission = pgTable(
@@ -258,7 +259,7 @@ export const permission = pgTable(
   (t) => [
     unique("permission_resource_action").on(t.resource, t.action),
     index("permission_resource_idx").on(t.resource),
-  ],
+  ]
 );
 
 export const rolePermission = pgTable(
@@ -276,7 +277,7 @@ export const rolePermission = pgTable(
   (t) => [
     unique("role_permission_unique").on(t.roleId, t.permissionId),
     index("role_permission_role_idx").on(t.roleId),
-  ],
+  ]
 );
 
 export const userRole = pgTable(
@@ -294,8 +295,9 @@ export const userRole = pgTable(
   (t) => [
     unique("user_role_unique").on(t.employeeId, t.roleId),
     index("user_role_employee_idx").on(t.employeeId),
-  ],
+  ]
 );
+
 
 // ============================================
 // DEPARTMENT (With company support)
@@ -325,7 +327,7 @@ export const department = pgTable(
     index("dept_company_idx").on(t.companyId),
     index("dept_manager_idx").on(t.managerId),
     index("dept_parent_idx").on(t.parentDepartmentId),
-  ],
+  ]
 );
 
 // ============================================
@@ -358,7 +360,7 @@ export const position = pgTable(
     index("position_title_idx").on(t.title),
     index("position_dept_idx").on(t.departmentId),
     index("position_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 // ============================================
@@ -413,8 +415,9 @@ export const employee = pgTable(
     index("employee_department_idx").on(t.departmentId),
     index("employee_manager_idx").on(t.reportingManagerId),
     index("employee_company_idx").on(t.companyId),
-  ],
+  ]
 );
+
 
 // ============================================
 // AUDIT LOG (Enterprise tracking)
@@ -440,7 +443,7 @@ export const auditLog = pgTable(
     index("audit_changed_by_idx").on(t.changedBy),
     index("audit_changed_at_idx").on(t.changedAt),
     index("audit_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 // ============================================
@@ -464,7 +467,7 @@ export const emergencyContact = pgTable(
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
-  (t) => [index("emergency_employee_idx").on(t.employeeId)],
+  (t) => [index("emergency_employee_idx").on(t.employeeId)]
 );
 
 // ============================================
@@ -491,7 +494,7 @@ export const bankInfo = pgTable(
   (t) => [
     unique("bank_account_unique").on(t.employeeId, t.accountNo),
     index("bank_employee_idx").on(t.employeeId),
-  ],
+  ]
 );
 
 // ============================================
@@ -520,7 +523,7 @@ export const address = pgTable(
   (t) => [
     index("address_employee_idx").on(t.employeeId),
     index("address_type_idx").on(t.type),
-  ],
+  ]
 );
 
 // ============================================
@@ -547,7 +550,7 @@ export const education = pgTable(
   (t) => [
     index("education_employee_idx").on(t.employeeId),
     index("education_degree_idx").on(t.degree),
-  ],
+  ]
 );
 
 // ============================================
@@ -574,7 +577,7 @@ export const experience = pgTable(
   (t) => [
     index("experience_employee_idx").on(t.employeeId),
     index("experience_company_idx").on(t.company),
-  ],
+  ]
 );
 
 // ============================================
@@ -605,7 +608,7 @@ export const document = pgTable(
   (t) => [
     index("document_employee_idx").on(t.employeeId),
     index("document_type_idx").on(t.documentType),
-  ],
+  ]
 );
 
 // ============================================
@@ -635,7 +638,7 @@ export const contract = pgTable(
   (t) => [
     index("contract_employee_idx").on(t.employeeId),
     index("contract_dates_idx").on(t.startDate, t.endDate),
-  ],
+  ]
 );
 
 // ============================================
@@ -664,7 +667,7 @@ export const shift = pgTable(
   (t) => [
     unique("shift_company_code").on(t.companyId, t.code),
     index("shift_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 export const employeeShift = pgTable(
@@ -685,7 +688,7 @@ export const employeeShift = pgTable(
     unique("employee_shift_date").on(t.employeeId, t.date),
     index("emp_shift_employee_idx").on(t.employeeId),
     index("emp_shift_date_idx").on(t.date),
-  ],
+  ]
 );
 
 // ============================================
@@ -722,7 +725,7 @@ export const attendance = pgTable(
     index("attendance_emp_date_idx").on(t.employeeId, t.date),
     index("attendance_status_idx").on(t.status),
     index("attendance_date_idx").on(t.date),
-  ],
+  ]
 );
 
 // ============================================
@@ -750,7 +753,7 @@ export const leaveType = pgTable(
   (t) => [
     unique("leave_type_company_name").on(t.companyId, t.name),
     index("leave_type_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 // ============================================
@@ -788,7 +791,7 @@ export const leave = pgTable(
     index("leave_status_idx").on(t.status),
     index("leave_dates_idx").on(t.startDate, t.endDate),
     index("leave_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 // ============================================
@@ -807,28 +810,17 @@ export const leaveBalance = pgTable(
       .references(() => leaveType.id),
     year: integer("year").notNull(),
     totalDays: decimal("total_days", { precision: 5, scale: 1 }).notNull(),
-    usedDays: decimal("used_days", { precision: 5, scale: 1 })
-      .notNull()
-      .default("0"),
-    pendingDays: decimal("pending_days", { precision: 5, scale: 1 })
-      .notNull()
-      .default("0"),
-    carriedOverDays: decimal("carried_over_days", {
-      precision: 5,
-      scale: 1,
-    }).default("0"),
+    usedDays: decimal("used_days", { precision: 5, scale: 1 }).notNull().default("0"),
+    pendingDays: decimal("pending_days", { precision: 5, scale: 1 }).notNull().default("0"),
+    carriedOverDays: decimal("carried_over_days", { precision: 5, scale: 1 }).default("0"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (t) => [
-    unique("leave_balance_emp_year_type").on(
-      t.employeeId,
-      t.year,
-      t.leaveTypeId,
-    ),
+    unique("leave_balance_emp_year_type").on(t.employeeId, t.year, t.leaveTypeId),
     index("leave_balance_employee_idx").on(t.employeeId),
     index("leave_balance_year_idx").on(t.year),
-  ],
+  ]
 );
 
 // ============================================
@@ -855,7 +847,7 @@ export const allowanceType = pgTable(
   (t) => [
     unique("allowance_company_code").on(t.companyId, t.code),
     index("allowance_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 export const deductionType = pgTable(
@@ -878,7 +870,7 @@ export const deductionType = pgTable(
   (t) => [
     unique("deduction_company_code").on(t.companyId, t.code),
     index("deduction_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 // ============================================
@@ -905,7 +897,7 @@ export const employeeAllowance = pgTable(
   (t) => [
     index("emp_allowance_employee_idx").on(t.employeeId),
     index("emp_allowance_effective_idx").on(t.effectiveFrom),
-  ],
+  ]
 );
 
 export const employeeDeduction = pgTable(
@@ -928,7 +920,7 @@ export const employeeDeduction = pgTable(
   (t) => [
     index("emp_deduction_employee_idx").on(t.employeeId),
     index("emp_deduction_effective_idx").on(t.effectiveFrom),
-  ],
+  ]
 );
 
 // ============================================
@@ -954,7 +946,7 @@ export const salaryStructure = pgTable(
   (t) => [
     index("salary_employee_idx").on(t.employeeId),
     index("salary_effective_from_idx").on(t.effectiveFrom),
-  ],
+  ]
 );
 
 // ============================================
@@ -974,17 +966,11 @@ export const payroll = pgTable(
     month: integer("month").notNull(),
     year: integer("year").notNull(),
     basicSalary: decimal("basic_salary", { precision: 12, scale: 2 }).notNull(),
-    totalAllowances: decimal("total_allowances", { precision: 12, scale: 2 })
-      .notNull()
-      .default("0"),
-    totalDeductions: decimal("total_deductions", { precision: 12, scale: 2 })
-      .notNull()
-      .default("0"),
+    totalAllowances: decimal("total_allowances", { precision: 12, scale: 2 }).notNull().default("0"),
+    totalDeductions: decimal("total_deductions", { precision: 12, scale: 2 }).notNull().default("0"),
     netSalary: decimal("net_salary", { precision: 12, scale: 2 }).notNull(),
     bonus: decimal("bonus", { precision: 12, scale: 2 }).default("0"),
-    overtimePay: decimal("overtime_pay", { precision: 12, scale: 2 }).default(
-      "0",
-    ),
+    overtimePay: decimal("overtime_pay", { precision: 12, scale: 2 }).default("0"),
     taxAmount: decimal("tax_amount", { precision: 12, scale: 2 }).default("0"),
     paymentDate: date("payment_date"),
     paymentMethod: text("payment_method"),
@@ -1002,7 +988,7 @@ export const payroll = pgTable(
     index("payroll_month_year_idx").on(t.month, t.year),
     index("payroll_status_idx").on(t.status),
     index("payroll_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 export const payrollItem = pgTable(
@@ -1022,7 +1008,7 @@ export const payrollItem = pgTable(
   (t) => [
     index("payroll_item_payroll_idx").on(t.payrollId),
     index("payroll_item_type_idx").on(t.type),
-  ],
+  ]
 );
 
 // ============================================
@@ -1049,7 +1035,7 @@ export const kpi = pgTable(
   (t) => [
     index("kpi_company_idx").on(t.companyId),
     index("kpi_category_idx").on(t.category),
-  ],
+  ]
 );
 
 export const performanceReview = pgTable(
@@ -1080,7 +1066,7 @@ export const performanceReview = pgTable(
     index("perf_review_employee_idx").on(t.employeeId),
     index("perf_review_reviewer_idx").on(t.reviewerId),
     index("perf_review_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 export const employeeKpi = pgTable(
@@ -1101,7 +1087,7 @@ export const employeeKpi = pgTable(
   (t) => [
     unique("review_kpi_unique").on(t.reviewId, t.kpiId),
     index("emp_kpi_review_idx").on(t.reviewId),
-  ],
+  ]
 );
 
 // ============================================
@@ -1136,7 +1122,7 @@ export const jobPost = pgTable(
     index("job_post_company_idx").on(t.companyId),
     index("job_post_title_idx").on(t.title),
     index("job_post_status_idx").on(t.isActive),
-  ],
+  ]
 );
 
 export const applicant = pgTable(
@@ -1165,7 +1151,7 @@ export const applicant = pgTable(
     index("applicant_email_idx").on(t.email),
     index("applicant_status_idx").on(t.status),
     index("applicant_company_idx").on(t.companyId),
-  ],
+  ]
 );
 
 export const interview = pgTable(
@@ -1191,7 +1177,7 @@ export const interview = pgTable(
     index("interview_applicant_idx").on(t.applicantId),
     index("interview_interviewer_idx").on(t.interviewerId),
     index("interview_scheduled_idx").on(t.scheduledAt),
-  ],
+  ]
 );
 
 // ============================================
@@ -1225,7 +1211,7 @@ export const asset = pgTable(
     index("asset_company_idx").on(t.companyId),
     index("asset_assigned_idx").on(t.assignedTo),
     index("asset_status_idx").on(t.status),
-  ],
+  ]
 );
 
 // ============================================
@@ -1255,7 +1241,7 @@ export const training = pgTable(
   (t) => [
     index("training_company_idx").on(t.companyId),
     index("training_dates_idx").on(t.startDate, t.endDate),
-  ],
+  ]
 );
 
 export const trainingParticipant = pgTable(
@@ -1277,7 +1263,7 @@ export const trainingParticipant = pgTable(
   (t) => [
     unique("training_participant_unique").on(t.trainingId, t.employeeId),
     index("training_participant_emp_idx").on(t.employeeId),
-  ],
+  ]
 );
 
 // ============================================
@@ -1306,7 +1292,7 @@ export const resignation = pgTable(
   (t) => [
     index("resignation_employee_idx").on(t.employeeId),
     index("resignation_status_idx").on(t.status),
-  ],
+  ]
 );
 
 export const exitClearance = pgTable(
@@ -1326,7 +1312,7 @@ export const exitClearance = pgTable(
   (t) => [
     index("exit_clearance_resignation_idx").on(t.resignationId),
     index("exit_clearance_department_idx").on(t.department),
-  ],
+  ]
 );
 
 // ============================================
@@ -1358,7 +1344,7 @@ export const notification = pgTable(
     index("notification_company_idx").on(t.companyId),
     index("notification_is_read_idx").on(t.isRead),
     index("notification_created_at_idx").on(t.createdAt),
-  ],
+  ]
 );
 
 // ============================================
@@ -1382,7 +1368,7 @@ export const positionHistory = pgTable(
   (t) => [
     index("pos_history_employee_idx").on(t.employeeId),
     index("pos_history_effective_idx").on(t.effectiveDate),
-  ],
+  ]
 );
 
 export const salaryHistory = pgTable(
@@ -1403,7 +1389,7 @@ export const salaryHistory = pgTable(
   (t) => [
     index("salary_history_employee_idx").on(t.employeeId),
     index("salary_history_effective_idx").on(t.effectiveFrom),
-  ],
+  ]
 );
 
 // ============================================
@@ -1455,25 +1441,19 @@ export const employeeRelations = relations(employee, ({ one, many }) => ({
   bankInfo: many(bankInfo),
   contracts: many(contract),
   attendances: many(attendance),
-  leaves: many(leave, {
-    relationName: "employee_leaves", // ✅ MATCH THIS
-  }),
+  leaves: many(leave),
   leaveBalances: many(leaveBalance),
   payrolls: many(payroll),
   salaryStructures: many(salaryStructure),
   employeeAllowances: many(employeeAllowance),
   employeeDeductions: many(employeeDeduction),
-  performanceReviews: many(performanceReview, {
-    relationName: "reviewee", // ✅ match this
-  }),
+  performanceReviews: many(performanceReview),
   notifications: many(notification),
   assignedAssets: many(asset, {
     relationName: "assigned_assets",
   }),
   trainingParticipants: many(trainingParticipant),
-  resignation: many(resignation, {
-    relationName: "employee_resignation",
-  }),
+  resignation: one(resignation),
 }));
 
 export const departmentRelations = relations(department, ({ one, many }) => ({
@@ -1552,6 +1532,7 @@ export const shiftRelations = relations(shift, ({ one, many }) => ({
   employeeShifts: many(employeeShift), // Add this
 }));
 
+
 export const allowanceTypeRelations = relations(allowanceType, ({ one }) => ({
   company: one(company, {
     fields: [allowanceType.companyId],
@@ -1573,12 +1554,17 @@ export const jobPostRelations = relations(jobPost, ({ one }) => ({
   }),
 }));
 
+
+
 export const trainingRelations = relations(training, ({ one }) => ({
   company: one(company, {
     fields: [training.companyId],
     references: [company.id],
   }),
 }));
+
+
+
 
 export const addressRelations = relations(address, ({ one }) => ({
   employee: one(employee, {
@@ -1608,15 +1594,12 @@ export const documentRelations = relations(document, ({ one }) => ({
   }),
 }));
 
-export const emergencyContactRelations = relations(
-  emergencyContact,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [emergencyContact.employeeId],
-      references: [employee.id],
-    }),
+export const emergencyContactRelations = relations(emergencyContact, ({ one }) => ({
+  employee: one(employee, {
+    fields: [emergencyContact.employeeId],
+    references: [employee.id],
   }),
-);
+}));
 
 export const bankInfoRelations = relations(bankInfo, ({ one }) => ({
   employee: one(employee, {
@@ -1632,15 +1615,14 @@ export const contractRelations = relations(contract, ({ one }) => ({
   }),
 }));
 
-export const salaryStructureRelations = relations(
-  salaryStructure,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [salaryStructure.employeeId],
-      references: [employee.id],
-    }),
+
+
+export const salaryStructureRelations = relations(salaryStructure, ({ one }) => ({
+  employee: one(employee, {
+    fields: [salaryStructure.employeeId],
+    references: [employee.id],
   }),
-);
+}));
 
 // Add all these missing relations
 
@@ -1655,6 +1637,8 @@ export const attendanceRelations = relations(attendance, ({ one }) => ({
   }),
 }));
 
+
+
 export const payrollRelations = relations(payroll, ({ one }) => ({
   employee: one(employee, {
     fields: [payroll.employeeId],
@@ -1666,21 +1650,18 @@ export const payrollRelations = relations(payroll, ({ one }) => ({
   }),
 }));
 
-export const performanceReviewRelations = relations(
-  performanceReview,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [performanceReview.employeeId],
-      references: [employee.id],
-      relationName: "reviewee",
-    }),
-    reviewer: one(employee, {
-      fields: [performanceReview.reviewerId],
-      references: [employee.id],
-      relationName: "reviewer",
-    }),
+export const performanceReviewRelations = relations(performanceReview, ({ one }) => ({
+  employee: one(employee, {
+    fields: [performanceReview.employeeId],
+    references: [employee.id],
+    relationName: "reviewee",
   }),
-);
+  reviewer: one(employee, {
+    fields: [performanceReview.reviewerId],
+    references: [employee.id],
+    relationName: "reviewer",
+  }),
+}));
 
 export const notificationRelations = relations(notification, ({ one }) => ({
   employee: one(employee, {
@@ -1701,29 +1682,24 @@ export const assetRelations = relations(asset, ({ one }) => ({
   assignedTo: one(employee, {
     fields: [asset.assignedTo],
     references: [employee.id],
-    relationName: "assigned_assets",
   }),
 }));
 
-export const trainingParticipantRelations = relations(
-  trainingParticipant,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [trainingParticipant.employeeId],
-      references: [employee.id],
-    }),
-    training: one(training, {
-      fields: [trainingParticipant.trainingId],
-      references: [training.id],
-    }),
+export const trainingParticipantRelations = relations(trainingParticipant, ({ one }) => ({
+  employee: one(employee, {
+    fields: [trainingParticipant.employeeId],
+    references: [employee.id],
   }),
-);
+  training: one(training, {
+    fields: [trainingParticipant.trainingId],
+    references: [training.id],
+  }),
+}));
 
 export const resignationRelations = relations(resignation, ({ one }) => ({
   employee: one(employee, {
     fields: [resignation.employeeId],
     references: [employee.id],
-    relationName: "employee_resignation", // ✅ ADD
   }),
   approvedBy: one(employee, {
     fields: [resignation.approvedById],
@@ -1732,33 +1708,27 @@ export const resignationRelations = relations(resignation, ({ one }) => ({
   }),
 }));
 
-export const employeeAllowanceRelations = relations(
-  employeeAllowance,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [employeeAllowance.employeeId],
-      references: [employee.id],
-    }),
-    allowanceType: one(allowanceType, {
-      fields: [employeeAllowance.allowanceTypeId],
-      references: [allowanceType.id],
-    }),
+export const employeeAllowanceRelations = relations(employeeAllowance, ({ one }) => ({
+  employee: one(employee, {
+    fields: [employeeAllowance.employeeId],
+    references: [employee.id],
   }),
-);
+  allowanceType: one(allowanceType, {
+    fields: [employeeAllowance.allowanceTypeId],
+    references: [allowanceType.id],
+  }),
+}));
 
-export const employeeDeductionRelations = relations(
-  employeeDeduction,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [employeeDeduction.employeeId],
-      references: [employee.id],
-    }),
-    deductionType: one(deductionType, {
-      fields: [employeeDeduction.deductionTypeId],
-      references: [deductionType.id],
-    }),
+export const employeeDeductionRelations = relations(employeeDeduction, ({ one }) => ({
+  employee: one(employee, {
+    fields: [employeeDeduction.employeeId],
+    references: [employee.id],
   }),
-);
+  deductionType: one(deductionType, {
+    fields: [employeeDeduction.deductionTypeId],
+    references: [deductionType.id],
+  }),
+}));
 
 export const employeeShiftRelations = relations(employeeShift, ({ one }) => ({
   employee: one(employee, {
@@ -1771,19 +1741,16 @@ export const employeeShiftRelations = relations(employeeShift, ({ one }) => ({
   }),
 }));
 
-export const positionHistoryRelations = relations(
-  positionHistory,
-  ({ one }) => ({
-    employee: one(employee, {
-      fields: [positionHistory.employeeId],
-      references: [employee.id],
-    }),
-    position: one(position, {
-      fields: [positionHistory.positionId],
-      references: [position.id],
-    }),
+export const positionHistoryRelations = relations(positionHistory, ({ one }) => ({
+  employee: one(employee, {
+    fields: [positionHistory.employeeId],
+    references: [employee.id],
   }),
-);
+  position: one(position, {
+    fields: [positionHistory.positionId],
+    references: [position.id],
+  }),
+}));
 
 export const salaryHistoryRelations = relations(salaryHistory, ({ one }) => ({
   employee: one(employee, {
@@ -1807,7 +1774,6 @@ export const leaveRelations = relations(leave, ({ one }) => ({
   employee: one(employee, {
     fields: [leave.employeeId],
     references: [employee.id],
-    relationName: "employee_leaves", // ✅ ADD THIS
   }),
   approvedBy: one(employee, {
     fields: [leave.approvedById],
@@ -1838,65 +1804,6 @@ export const leaveBalanceRelations = relations(leaveBalance, ({ one }) => ({
 
 // And similarly for employeeAllowance, employeeDeduction, etc.
 
-export const kpiRelations = relations(kpi, ({ one, many }) => ({
-  company: one(company, {
-    fields: [kpi.companyId],
-    references: [company.id],
-  }),
-  employeeKpis: many(employeeKpi),
-}));
-
-export const applicantRelations = relations(applicant, ({ one, many }) => ({
-  company: one(company, {
-    fields: [applicant.companyId],
-    references: [company.id],
-  }),
-  jobPost: one(jobPost, {
-    fields: [applicant.jobPostId],
-    references: [jobPost.id],
-  }),
-  interviews: many(interview),
-}));
-
-export const interviewRelations = relations(interview, ({ one }) => ({
-  applicant: one(applicant, {
-    fields: [interview.applicantId],
-    references: [applicant.id],
-  }),
-  interviewer: one(employee, {
-    fields: [interview.interviewerId],
-    references: [employee.id],
-  }),
-}));
-
-export const exitClearanceRelations = relations(exitClearance, ({ one }) => ({
-  resignation: one(resignation, {
-    fields: [exitClearance.resignationId],
-    references: [resignation.id],
-  }),
-  clearedBy: one(employee, {
-    fields: [exitClearance.clearedBy],
-    references: [employee.id],
-  }),
-}));
-
-export const payrollItemRelations = relations(payrollItem, ({ one }) => ({
-  payroll: one(payroll, {
-    fields: [payrollItem.payrollId],
-    references: [payroll.id],
-  }),
-}));
-
-export const employeeKpiRelations = relations(employeeKpi, ({ one }) => ({
-  review: one(performanceReview, {
-    fields: [employeeKpi.reviewId],
-    references: [performanceReview.id],
-  }),
-  kpi: one(kpi, {
-    fields: [employeeKpi.kpiId],
-    references: [kpi.id],
-  }),
-}));
 
 // Add more relations as needed...
 
