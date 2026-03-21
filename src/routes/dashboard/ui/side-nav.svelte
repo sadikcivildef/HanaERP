@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import { clickOutside } from "$lib/actions/click-outside";
   import icon from "$lib/assets/favicon.svg";
   import Icon from "@iconify/svelte";
   import { fly } from "svelte/transition";
@@ -9,9 +10,13 @@
 </script>
 
 <div class="w-64 flex flex-col h-screen bg-primary/3 border-r border-gray-300">
-  <div class="h-12 border-b ps-4 border-gray-300">
-    <a href="/" class="flex items-center h-12 text-lg gap-3 text-primary">
-      <img src={icon} alt="" class="h-5" /> Hana ERP
+  <div class="h-12 flex items-center border-b px-1 border-gray-300">
+    <a href="/" class="flex w-full items-center h-10 gap-3 font-light px-2 text-primary hover:bg-primary/3 rounded-md">
+      <img src={icon} alt="" class="h-7.5" />
+      <div class="flex flex-col">
+        <div class="text-sm font-medium">Hana ERP</div>
+        <div class="text-xs text-gray-500">{data.companyName}</div>
+      </div>
     </a>
   </div>
   <div
@@ -177,7 +182,7 @@
         >
       </li>
     </ul>
-    <div class="px-2 py-4 relative">
+    <div class="px-2 py-4 relative" use:clickOutside={() => (userMenuOpen = false)}>
       {#if userMenuOpen}
         <div
           in:fly={{ x: -5, y: 5, duration: 50 }}
@@ -259,7 +264,8 @@
         <img src="/shadcn.jpg" alt="" class="w-8 h-8 rounded-lg" />
         <div class="flex-1 flex flex-col text-start justify-start">
           <div class="text-sm text-black font-semibold">{data.user.name}</div>
-          {data.user.email}
+          <div>{data.user.email}</div>
+          <!-- <div>{data.companyName}</div> -->
         </div>
         <div class="ps-2 text-black">
           <Icon icon="pepicons-pencil:dots-y" width="16" height="16" />
