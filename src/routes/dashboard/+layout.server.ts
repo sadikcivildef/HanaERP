@@ -5,6 +5,8 @@ import { db } from "$lib/server/db";
 import { company } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
+
+
 export const load: LayoutServerLoad = async (event) => {
     if (!event.locals.user) {
         return redirect(302, '/login');

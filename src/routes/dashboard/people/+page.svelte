@@ -8,6 +8,8 @@
   import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
 
+  export let data: { employees: any[] };
+
   // When this specific page loads, change the title
   onMount(() => {
     $navTitle = "Employee";
@@ -18,7 +20,9 @@
     startLoading();
   });
 
-const employees = [
+  const employees = data.employees;
+
+const employeeTest = [
   { id: 101, name: "Rahim Mia", department: "Sewing", section: "A1", position: "Operator", joining_date: "18-03-2026", status: "Active" },
   { id: 102, name: "Fatima Begum", department: "Cutting", section: "-", position: "Assistant Operator", joining_date: "12-07-2024", status: "Inactive" },
 
@@ -87,13 +91,13 @@ const employees = [
     <Table.TableBody>
       {#each paginatedItems as employee}
         <Table.TableRow>
-          <Table.TableCell>{employee.id}</Table.TableCell>
+          <Table.TableCell>{employee.employeeCode}</Table.TableCell>
           <Table.TableCell>{employee.name}</Table.TableCell>
-          <Table.TableCell>{employee.department}</Table.TableCell>
-          <Table.TableCell>{employee.section}</Table.TableCell>
-          <Table.TableCell>{employee.position}</Table.TableCell>
-          <Table.TableCell>{employee.joining_date}</Table.TableCell>
-          <Table.TableCell align="right">{employee.status}</Table.TableCell>
+          <Table.TableCell>{employee.department?.name}</Table.TableCell>
+          <Table.TableCell>{employee.department?.parentDepartment?.name ?? "-"}</Table.TableCell>
+          <Table.TableCell>{employee.position?.title}</Table.TableCell>
+          <Table.TableCell>{employee.joiningDate}</Table.TableCell>
+          <Table.TableCell align="right">{employee.isActive ? "Active" : "Inactive"}</Table.TableCell>
         </Table.TableRow>
       {/each}
     </Table.TableBody>
