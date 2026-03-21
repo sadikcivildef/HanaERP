@@ -1,4 +1,4 @@
-// schema.ts
+// lib/server/db/schema.ts
 import {
   pgTable,
   serial,
@@ -1474,6 +1474,20 @@ export const employeeRelations = relations(employee, ({ one, many }) => ({
   resignation: many(resignation, {
     relationName: "employee_resignation",
   }),
+  manager: one(employee, {
+    fields: [employee.reportingManagerId],
+    references: [employee.id],
+    relationName: "manager_reports",
+  }),
+
+  reports: many(employee, {
+    relationName: "manager_reports",
+  }),
+
+  // Fix these (relationName mismatch)
+  // leaves: many(leave),               // ← remove relationName or match it
+  performanceReviewsAsReviewee: many(performanceReview, { relationName: "reviewee" }),
+  performanceReviewsAsReviewer: many(performanceReview, { relationName: "reviewer" }),
 }));
 
 export const departmentRelations = relations(department, ({ one, many }) => ({

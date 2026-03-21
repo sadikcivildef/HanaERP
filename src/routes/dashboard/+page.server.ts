@@ -1,3 +1,4 @@
+// src/routes/dashboard/+page.server.ts
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { auth } from '$lib/server/auth';

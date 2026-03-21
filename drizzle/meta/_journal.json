@@ -8,6 +8,20 @@
       "when": 1774054543742,
       "tag": "0000_daily_doctor_faustus",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774088899086,
+      "tag": "0001_talented_baron_strucker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774089560966,
+      "tag": "0002_jazzy_centennial",
+      "breakpoints": true
     }
   ]
 }
