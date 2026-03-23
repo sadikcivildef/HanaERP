@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { navBtn, navBtnLink, navTitle } from "$lib/navStore";
-  import { onMount } from "svelte";
-
-  onMount(() => {
-    $navTitle = "Dashboard";
-    $navBtn = "";
-    $navBtnLink = "";
-  });
+  import Body from "./ui/body.svelte";
+  import TopNav from "./ui/top-nav.svelte";
 </script>
 
-Dashboard and all the summary will be added soon.
+<TopNav>
+  <div>Dashboard</div>
+</TopNav>
+<Body>
+  Hello from dashboard main page!
+</Body>

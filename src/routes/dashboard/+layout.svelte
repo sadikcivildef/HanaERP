@@ -18,10 +18,13 @@
     <SideNav {data}/>
   </div>
   <div class="flex-1 h-screen overflow-hidden relative">
-    <TopNav/>
+  <slot/>
+    <!-- <div
+  class="h-12 border-b border-gray-300 flex items-center justify-between px-6"
+> </div>
 
     <div class="p-6 h-[calc(100vh-3rem)] custom-scroll overflow-y-auto">
       {@render children()}
-    </div>
+    </div> -->
   </div>
 </div>

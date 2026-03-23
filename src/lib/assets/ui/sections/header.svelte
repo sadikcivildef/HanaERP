@@ -7,7 +7,7 @@
 </script>
 
 <div class="h-18 flex items-center justify-between px-10 z-50">
-  <a href="/" class="flex items-center text-2xl gap-3 text-amber-900">
+  <a href="/" class="flex items-center text-2xl gap-3 text-primary font-semibold">
     <img src={icon} alt="" class="h-10" /> Hana ERP
   </a>
 

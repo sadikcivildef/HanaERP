@@ -7,14 +7,17 @@
   import { startLoading } from "$lib/stores/loading";
   import Icon from "@iconify/svelte";
   import { onMount } from "svelte";
+  import Body from "../ui/body.svelte";
+  import TopNav from "../ui/top-nav.svelte";
+  import { goto } from "$app/navigation";
 
   export let data: { employees: any[] };
 
   // When this specific page loads, change the title
   onMount(() => {
-    $navTitle = "Employee";
-    $navBtn = "Add new";
-    $navBtnLink = "dashboard/people/add-new";
+    // $navTitle = "Employee";
+    // $navBtn = "Add new";
+    // $navBtnLink = "dashboard/people/add-new";
 
     // Start loading animation
     startLoading();
@@ -64,8 +67,13 @@ const employeeTest = [
   // ... continuing pattern ...
 ];
 </script>
+<TopNav>
+  <div>Employees</div>
+  <div class=""><Button onclick={()=>goto('/dashboard/create-new-employee')}>Add new</Button></div>
+</TopNav>
 
-<div class="flex w-fit gap-3 items-center">
+<Body>
+  <div class="flex w-fit gap-3 items-center">
   <Input
     type="text"
     name="search"
@@ -103,3 +111,4 @@ const employeeTest = [
     </Table.TableBody>
   </Table.Root>
 </Pagination>
+</Body>
